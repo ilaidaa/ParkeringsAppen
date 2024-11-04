@@ -36,34 +36,57 @@ namespace ParkeringsAppen
 
 
 
-            //Metod för att generera ett slumpmässigt fordon
-            //Basklassens första metod
-            public Vehicle GenerateRandomVehicle()
+            // Statisk metod för att generera ett slumpmässigt fordon. Kan vara en bil, motorcykel eller buss
+
+            public static Vehicle GenerateRandomVehicle()
+
             {
+
+                // Array med möjliga färger för fordonen
+
                 string[] colors = { "Röd", "Svart", "Grön", "Gul", "Blå" };
+
+
+                // Slumpmässigt val av färg från colors-arrayen
+
                 string color = colors[Random.Shared.Next(colors.Length)];
-                string licensePlate = $"ABC{Random.Shared.Next(100, 999)}"; // Enkelt registreringsnummer
-
-                int vehicleType = Random.Shared.Next(1, 4); // 1 = Car, 2 = MC, 3 = Bus
-                switch (vehicleType)
-                {
-                    case 1:
-                        bool isElectric = Random.Shared.Next(2) == 1;
-                        return new Car(color, licensePlate, isElectric);
-                    case 2:
-                        string[] brands = { "Harley", "Yamaha", "Kawasaki" };
-                        string brand = brands[Random.Shared.Next(brands.Length)];
-                        return new MC(color, licensePlate, brand);
-                    case 3:
-                        int passengers = Random.Shared.Next(10, 60);
-                        return new Bus(color, licensePlate, passengers);
-                    default:
-                        return null;
-                }
 
 
+                // Genererar en slumpmässig registreringsskylt i formatet "ABC123" med slumpmässiga siffror
+
+                string licensePlate = $"ABC{Random.Shared.Next(100, 999)}";
+
+
+                // Slumpmässigt val av fordonstyp (1 för bil, 2 för motorcykel, annars buss)
+
+                int type = Random.Shared.Next(1, 4);
+
+
+                // If-sats som bestämmer vilken typ av fordon som ska skapas baserat på det slumpmässiga numret
+
+                if (type == 1)
+
+                    // Skapar en bil (Car) med ett slumpmässigt värde (sant eller falskt) för om den är elektrisk
+
+                    return new Car(licensePlate, color, Random.Shared.Next(2) == 1);
+
+
+                if (type == 2)
+
+                    // Skapar en motorcykel (MC) med ett förinställt märke, "Yamaha"
+
+                    return new MC(licensePlate, color, "Yamaha");
+
+
+                // Skapar en buss (Bus) med ett slumpmässigt antal passagerare mellan 10 och 60
+
+                return new Bus(licensePlate, color, Random.Shared.Next(10, 60));
 
             }
+
+
+
+        }
 
 
 
@@ -152,4 +175,4 @@ namespace ParkeringsAppen
         }
 
     }
-}
+
