@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using static ParkeringsAppen.Vehicles;
@@ -41,5 +42,76 @@ namespace ParkeringsAppen
             private List<(Vehicle vehicle, int startSpot, DateTime endTime, bool hasFine)> parkedVehicles =
 
             new List<(Vehicle, int, DateTime, bool)>();
+
+
+
+
+
+
+
+
+        // Metod för att parkera ett fordon under en viss tidsperiod
+        public void ParkVehicle(Vehicle vehicle, int durationInSeconds)
+        {
+            // Hitta ledig plats för fordonet
+            int startSpot = FindAvailableSpot(vehicle);
+            // Kontrollera om det finns en ledig plats
+            if (startSpot != -1)
+            {
+                // Beräkna sluttiden för parkeringen och lägg till fordonet i listan över parkerade fordon
+                DateTime endTime = DateTime.Now.AddSeconds(durationInSeconds);
+                parkedVehicles.Add((vehicle, startSpot, endTime, false));
+
+                // Kontrollera om fordonet är en motorcykel (MC)
+                if (vehicle is MC)
+                {
+                    if (mcCount.ContainsKey(startSpot))
+                    {
+                        mcCount[startSpot] += 1; // Öka antalet MC på denna plats
+                        if (mcCount[startSpot] == 2) spots[startSpot] = true; // Markera platsen som full om det finns två MC
+                    }
+                    else
+                    {
+                        mcCount[startSpot] = 1; // Lägg till första MC på platsen
+                    }
+                }
+                else if (vehicle is Bus)
+                {
+                    // Markera två sammanhängande platser som upptagna för bussen
+                    spots[startSpot] = true;
+                    spots[startSpot + 1] = true;
+                    Console.WriteLine($"{vehicle.GetType().Name}{vehicle.LPlate} parkerad på platser {startSpot}{startSpot + 1}");
+                }
+                else
+                {
+                    // Markera en plats som upptagen för en bil
+                    spots[startSpot] = true;
+                    Console.WriteLine($" { vehicle.GetType().Name}{ vehicle.LPlate} parkerad på plats { startSpot}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Inga lediga platser för detta fordon");
+            }
+           
         }
+
+
+
+
+
+
+
+
+
+
+
+
+        //Metod som ska testas 
+        public int FindAvailableSpot(Vehicle vehicle)
+        {
+            return 0;
+        }
+
+    }
 }
