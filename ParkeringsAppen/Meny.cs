@@ -13,7 +13,7 @@ namespace ParkeringsAppen
     internal class Meny
     {
         // Metod för att visa menyn och hantera användarens val
-        public void ShowMeny()
+        internal void ShowMeny()
         {
             
             // Oändlig loop för att hålla menyn uppe tills användaren avslutar
@@ -38,10 +38,21 @@ namespace ParkeringsAppen
                     switch (choice)
                     {
                         case 1:
-                            //Gör en slumpgenererator som skapar en slumppad fordon
-                           
-                            //Lägg in metoden CollectVehicleInfo som tar en slumpad  bil.
-                           
+                            //Generera ett slumpmässigt fordon och samlar in ytterligare information om fordonet
+                           Vehicle vehicle = Vehicle.GenerateRandomVehicle();
+                           CollectVehicleInfo(vehicle);
+
+                            // Frågar efter parkeringstid i sekunder och försöker läsa in det
+                            Console.Write("Ange parkeringstid i sekunder: ");
+                            if(int.TryParse(Console.ReadLine(), out int duration))
+                            {
+                                //Parkerar fordonet med angiven tid 
+                                
+                            }
+                            else
+                            {
+                                Console.WriteLine("Ogiltig tid. Ange ett heltal");
+                            }
                             break;
                         case 2:
                            
