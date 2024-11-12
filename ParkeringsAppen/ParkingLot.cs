@@ -154,7 +154,10 @@ namespace ParkeringsAppen
                 Console.WriteLine($"{vehicle.GetType().Name} - {vehicle.LPlate} - {vehicle.Colour} - Plats {startSpot}" +
                 (vehicle is Bus ? $"-{startSpot + 1}" : "") + $" - {timeRemaining} {(hasFine ? "- Botad" : "")}");
             }
+
         }
+
+
 
 
 
