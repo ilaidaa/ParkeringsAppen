@@ -107,19 +107,19 @@ namespace ParkeringsAppen
             // Om fordonet är en bil, fråga om bilen är elektrisk
             if (vehicle is Car car)
             {
-                Console.Write("Är bilen elektrisk? (ja/nej): ");
+                Console.Write("BIL incheckad: Är bilen elektrisk? (ja/nej): ");
                 car.Electric = Console.ReadLine()?.ToLower() == "ja";
             }
             // Om fordonet är en motorcykel, fråga efter motorcykelns märke
             else if (vehicle is MC mc)
             {
-                Console.Write("Ange motorcykelns märke: ");
+                Console.Write("MC incheckad: Ange motorcykelns märke: ");
                 mc.Brand = Console.ReadLine();
             }
             // Om fordonet är en buss, fråga efter antalet passagerare
             else if (vehicle is Bus bus)
             {
-                Console.Write("Ange antalet passagerare: ");
+                Console.Write("BUSS incheckad: Ange antalet passagerare: ");
                 if (int.TryParse(Console.ReadLine(), out int passengers))
                 {
                     bus.Passengers = passengers;
