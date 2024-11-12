@@ -182,10 +182,35 @@ namespace ParkeringsAppen
 
 
         // Metod för att kontrollera om något fordon har överskridit sin parkeringstid
+
         public void CheckForExpiredVehicles()
+
         {
-           
+
+            foreach (var (vehicle, startSpot, endTime, hasFine) in parkedVehicles)
+
+            {
+
+                // Om sluttiden har passerat och fordonet inte redan har en böter
+
+                if (endTime < DateTime.Now && !hasFine)
+
+                {
+
+                    Console.WriteLine($"{vehicle.LPlate} har överstigit parkeringstiden. Bot på 500 kr.");
+
+                    earningsFromFines += 500; // Lägg till böter till intäkterna från böter
+
+                }
+
+            }
+
         }
+
+
+
+
+
 
 
 
