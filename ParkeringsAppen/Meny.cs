@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static ParkeringsAppen.Vehicles.Vehicle;
-using static ParkeringsAppen.Vehicles;
+using static ParkeringsAppen.Vehicle;
+using static ParkeringsAppen.Vehicle;
 
 namespace ParkeringsAppen
 {

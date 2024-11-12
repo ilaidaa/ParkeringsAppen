@@ -7,8 +7,6 @@ using System.Threading.Tasks;
 namespace ParkeringsAppen
 {
 
-    public class Vehicles
-    {
 
         //Basklassen fordon
         public abstract class Vehicle
@@ -174,5 +172,5 @@ namespace ParkeringsAppen
 
         }
 
-    }
+    
 

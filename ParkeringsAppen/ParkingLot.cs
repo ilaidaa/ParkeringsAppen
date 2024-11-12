@@ -4,12 +4,12 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
-using static ParkeringsAppen.Vehicles;
+using static ParkeringsAppen.Vehicle;
 
 namespace ParkeringsAppen
 {
 
-    internal class ParkingLot
+    public class ParkingLot
     {
         // Totala antalet parkeringsplatser i parkeringen, här satt till 25
         private int totalSpots = 25;
@@ -88,7 +88,7 @@ namespace ParkeringsAppen
         //Metod som ska testas 
         public int FindAvailableSpot(Vehicle vehicle)
         {
-            return 0;
+            return 1;
         }
 
 
