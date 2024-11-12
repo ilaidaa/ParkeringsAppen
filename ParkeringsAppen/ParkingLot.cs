@@ -88,7 +88,39 @@ namespace ParkeringsAppen
         //Metod som ska testas 
         public int FindAvailableSpot(Vehicle vehicle)
         {
-            return 1;
+
+            // Loopar igenom alla platser för att hitta en lämplig ledig plats
+            for (int i = 0; i < totalSpots; i++)
+            {
+                if (vehicle is MC)
+                {
+                    // Kontrollera om platsen är ledig för en MC eller om det redan finns en MC där (men inte två)
+                    if (!spots[i] || (mcCount.ContainsKey(i) && mcCount[i] < 2))
+                    {
+                        return i;
+                    }
+                }
+                else if (vehicle is Bus)
+                {
+                    // Kontrollera om det finns två sammanhängande lediga platser för bussen
+                    if (i + 1 < totalSpots && !spots[i] && !spots[i + 1] &&
+                        !mcCount.ContainsKey(i) && !mcCount.ContainsKey(i + 1))
+                    {
+                        return i;
+                    }
+                }
+                else
+                {
+                    // Kontrollera om en plats är ledig för en bil och inte delas med en MC
+                    if (!spots[i] && !mcCount.ContainsKey(i))
+                    {
+                        return i;
+                    }
+                }
+            }
+            // Returnerar -1 om ingen ledig plats hittas
+            return -1;
+
         }
 
 
