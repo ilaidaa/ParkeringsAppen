@@ -127,11 +127,35 @@ namespace ParkeringsAppen
 
 
 
-        // Metod för att visa alla parkerade fordon 
-        public string ShowParkedVehicles()
+
+
+
+
+
+
+
+        // Metod för att visa alla parkerade fordon
+        public void ShowParkedVehicles()
         {
-            return null;
+            // Kontrollera om några fordon är parkerade
+
+            if (parkedVehicles.Count == 0)
+            {
+                Console.WriteLine("Inga fordon är parkerade.");
+                return;
+            }
+
+
+            Console.WriteLine("Parkerade fordon:");
+            // Loopar igenom alla parkerade fordon och visar deras information
+            foreach (var (vehicle, startSpot, endTime, hasFine) in parkedVehicles)
+            {
+                string timeRemaining = (endTime > DateTime.Now) ? $"{(endTime - DateTime.Now).Seconds} sek kvar" : "Tiden ute";
+                Console.WriteLine($"{vehicle.GetType().Name} - {vehicle.LPlate} - {vehicle.Colour} - Plats {startSpot}" +
+                (vehicle is Bus ? $"-{startSpot + 1}" : "") + $" - {timeRemaining} {(hasFine ? "- Botad" : "")}");
+            }
         }
+
 
 
 
@@ -143,6 +167,12 @@ namespace ParkeringsAppen
         {
             return null;
         }
+
+
+
+
+
+
 
 
 
